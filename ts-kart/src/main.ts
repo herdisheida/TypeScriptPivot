@@ -24,12 +24,18 @@ function getRandomItem(): Item {
   return { type: "coin", points: 1 };
 }
 
+interface IRacer {
+  name: string;
+  position: number;
+  move(): void;
+}
+
 // Union type
 
 type RaceState = "idle" | "racing" | "finished";
 type MapName = "Rainbow Road" | "Choco Mountain";
 
-abstract class Driver {
+abstract class Driver implements IRacer {
   state: RaceState;
 
   name: string;
