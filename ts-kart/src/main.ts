@@ -5,7 +5,19 @@ import confetti from "canvas-confetti";
 // WORKSHOP 2: POKEMON KART REFACTOR
 // =============================================================
 
+type RaceState = "idle" | "racing" | "finished";
+type MapName = "Rainbow Road" | "Choco Mountain";
+
 class Driver {
+  state: RaceState;
+
+  name: string;
+  spriteUrl: string;
+  laneId: number;
+  position: number;
+  speed: number;
+  element: HTMLDivElement;
+
   constructor(name: string, spriteUrl: string, laneId: number) {
     this.name = name;
     this.spriteUrl = spriteUrl;
