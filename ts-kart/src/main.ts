@@ -21,7 +21,7 @@ function getRandomItem(): Item {
   if (Math.random() < 0.5) {
     return { type: "mushroom", speedBoost: 0.5 };
   }
-  return { type: "coin", points: 10 };
+  return { type: "coin", points: 1 };
 }
 
 // Union type
@@ -70,12 +70,20 @@ abstract class Driver {
       case "mushroom":
         console.log(`${this.name} used a Mushroom!`);
         this.speed += this.inventory.speedBoost;
+
+        // visual
+        this.element.classList.add("mushroom-boost");
+        setTimeout(() => this.element.classList.remove("mushroom-boost"), 1500);
         break;
 
       case "coin":
         console.log(
           `${this.name} collected a Coin worth ${this.inventory.points} points!`,
         );
+
+        // visual
+        this.element.classList.add("coin-collect");
+        setTimeout(() => this.element.classList.remove("coin-collect"), 1500);
         break;
     }
 
@@ -194,7 +202,7 @@ async function startRace() {
 
   drivers.forEach((d) => {
     d.state = "racing";
-    d.speed = Math.random() * 0.5 + 0.2;
+    d.speed = Math.random() * 0.4 + 0.2;
   });
 
   requestAnimationFrame(gameLoop);
