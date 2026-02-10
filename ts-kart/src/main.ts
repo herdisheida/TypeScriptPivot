@@ -233,6 +233,10 @@ function gameLoop() {
           driver.useStar();
         } else if (driver instanceof Charizard) {
           driver.roar();
+        } else if (driver instanceof Jigglypuff) {
+          // driver.ballRoll();
+        } else if (driver instanceof Bulbasaur) {
+          // driver.vineWhip();
         }
       }
     }
