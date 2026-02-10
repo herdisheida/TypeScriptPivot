@@ -150,9 +150,9 @@ function gameLoop() {
       driver.move();
 
       if (Math.random() < 0.01) {
-        if (driver.name === "Mario") {
+        if (driver instanceof Pikachu) {
           driver.useStar();
-        } else if (driver.name === "Bowser") {
+        } else if (driver instanceof Charizard) {
           driver.roar();
         }
       }
