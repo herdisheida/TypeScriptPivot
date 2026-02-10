@@ -14,7 +14,7 @@ class Driver {
     this.position = 0;
     this.speed = Math.random() * 0.5 + 0.2;
     this.state = "idle";
-    
+
     this.element = document.createElement("div");
     this.element.className = "kart";
 
@@ -178,6 +178,5 @@ function finishRace(winner) {
     colors: ["#FFD700", "#FF0000", "#00FF00", "#0000FF"],
   });
 }
-
 
 document.getElementById("start-btn").addEventListener("click", startRace);
