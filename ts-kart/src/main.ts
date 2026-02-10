@@ -8,7 +8,7 @@ import confetti from "canvas-confetti";
 type RaceState = "idle" | "racing" | "finished";
 type MapName = "Rainbow Road" | "Choco Mountain";
 
-class Driver {
+abstract class Driver {
   state: RaceState;
 
   name: string;
