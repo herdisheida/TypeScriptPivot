@@ -31,7 +31,11 @@ class Driver {
     this.element.className = "kart";
 
     this.element.style.backgroundImage = `url('${spriteUrl}')`;
-    document.getElementById(`lane-${laneId}`).appendChild(this.element);
+
+    const laneElement = document.getElementById(
+      `lane-${laneId}`,
+    ) as HTMLDivElement;
+    laneElement.appendChild(this.element);
   }
 
   move() {
@@ -114,12 +118,13 @@ let currentMap: MapName = "Rainbow Road";
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function startRace() {
-  const overlay = document.getElementById("overlay");
-  const counter = document.getElementById("counter-text");
-  const btn = document.getElementById("start-btn");
+  const overlay = document.getElementById("overlay") as HTMLDivElement;
+  const counter = document.getElementById("counter-text") as HTMLDivElement;
+  const btn = document.getElementById("start-btn") as HTMLButtonElement;
+  const scoreboard = document.getElementById("scoreboard") as HTMLDivElement;
 
   btn.disabled = true;
-  document.getElementById("scoreboard").innerText = "Race Starting...";
+  scoreboard.innerText = "Race Starting...";
   drivers.forEach((d) => {
     d.position = 0;
     d.element.style.left = "0%";
@@ -177,11 +182,11 @@ function gameLoop() {
 }
 
 function finishRace(winner: Driver) {
-  if (document.getElementById("scoreboard").innerText.includes("Winner"))
-    return;
+  const scoreboard = document.getElementById("scoreboard") as HTMLDivElement;
+  if (scoreboard.innerText.includes("Winner")) return;
 
   const message = `Winner: ${winner.name} on ${currentMap}!`;
-  document.getElementById("scoreboard").innerText = message;
+  scoreboard.innerText = message;
 
   confetti({
     particleCount: 150,
@@ -191,4 +196,5 @@ function finishRace(winner: Driver) {
   });
 }
 
-document.getElementById("start-btn").addEventListener("click", startRace);
+const startBtn = document.getElementById("start-btn") as HTMLButtonElement;
+startBtn.addEventListener("click", startRace);
