@@ -5,6 +5,20 @@ import confetti from "canvas-confetti";
 // WORKSHOP 2: POKEMON KART REFACTOR
 // =============================================================
 
+// --- Task 7: The Item Box (Discriminated Unions) ---
+interface Mushroom {
+  type: "mushroom";
+  speedBoost: number;
+}
+interface Coin {
+  type: "coin";
+  points: number;
+}
+
+type Item = Mushroom | Coin;
+
+// Union type for items
+
 type RaceState = "idle" | "racing" | "finished";
 type MapName = "Rainbow Road" | "Choco Mountain";
 
@@ -18,6 +32,8 @@ abstract class Driver {
   speed: number;
   element: HTMLDivElement;
 
+  inventory: Item | null;
+
   constructor(name: string, spriteUrl: string, laneId: number) {
     this.name = name;
     this.spriteUrl = spriteUrl;
@@ -29,6 +45,8 @@ abstract class Driver {
 
     this.element = document.createElement("div");
     this.element.className = "kart";
+
+    this.inventory = null;
 
     this.element.style.backgroundImage = `url('${spriteUrl}')`;
 
