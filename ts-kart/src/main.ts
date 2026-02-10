@@ -6,7 +6,7 @@ import confetti from "canvas-confetti";
 // =============================================================
 
 class Driver {
-  constructor(name, spriteUrl, laneId) {
+  constructor(name: string, spriteUrl: string, laneId: number) {
     this.name = name;
     this.spriteUrl = spriteUrl;
     this.laneId = laneId;
@@ -36,7 +36,7 @@ class Driver {
 }
 
 class Pikachu extends Driver {
-  constructor(lane) {
+  constructor(lane: number) {
     super(
       "Pikachu",
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
@@ -53,7 +53,7 @@ class Pikachu extends Driver {
 }
 
 class Charizard extends Driver {
-  constructor(lane) {
+  constructor(lane: number) {
     super(
       "Charizard",
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
@@ -69,7 +69,7 @@ class Charizard extends Driver {
 }
 
 class Jigglypuff extends Driver {
-  constructor(lane) {
+  constructor(lane: number) {
     super(
       "Jigglypuff",
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
@@ -79,7 +79,7 @@ class Jigglypuff extends Driver {
 }
 
 class Bulbasaur extends Driver {
-  constructor(lane) {
+  constructor(lane: number) {
     super(
       "Bulbasaur",
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
@@ -99,7 +99,7 @@ const drivers = [
 
 let currentMap = "Rainbow Road";
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function startRace() {
   const overlay = document.getElementById("overlay");
@@ -164,7 +164,7 @@ function gameLoop() {
   }
 }
 
-function finishRace(winner) {
+function finishRace(winner: Driver) {
   if (document.getElementById("scoreboard").innerText.includes("Winner"))
     return;
 
