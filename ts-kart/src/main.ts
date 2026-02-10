@@ -17,7 +17,14 @@ interface Coin {
 
 type Item = Mushroom | Coin;
 
-// Union type for items
+function getRandomItem(): Item {
+  if (Math.random() < 0.5) {
+    return { type: "mushroom", speedBoost: 0.5 };
+  }
+  return { type: "coin", points: 10 };
+}
+
+// Union type
 
 type RaceState = "idle" | "racing" | "finished";
 type MapName = "Rainbow Road" | "Choco Mountain";
@@ -46,7 +53,7 @@ abstract class Driver {
     this.element = document.createElement("div");
     this.element.className = "kart";
 
-    this.inventory = null;
+    this.inventory = getRandomItem();
 
     this.element.style.backgroundImage = `url('${spriteUrl}')`;
 
@@ -54,6 +61,25 @@ abstract class Driver {
       `lane-${laneId}`,
     ) as HTMLDivElement;
     laneElement.appendChild(this.element);
+  }
+
+  useItem() {
+    if (!this.inventory) return;
+
+    switch (this.inventory.type) {
+      case "mushroom":
+        console.log(`${this.name} used a Mushroom!`);
+        this.speed += this.inventory.speedBoost;
+        break;
+
+      case "coin":
+        console.log(
+          `${this.name} collected a Coin worth ${this.inventory.points} points!`,
+        );
+        break;
+    }
+
+    this.inventory = null;
   }
 
   move() {
@@ -146,6 +172,7 @@ async function startRace() {
   drivers.forEach((d) => {
     d.position = 0;
     d.element.style.left = "0%";
+    d.inventory = getRandomItem(); // new race = new random item
   });
 
   overlay.classList.remove("hidden");
@@ -183,6 +210,9 @@ function gameLoop() {
     if (driver.state === "racing") {
       isRaceOn = true;
       driver.move();
+
+      // 10% chance to use item every frame
+      if (Math.random() < 0.1) driver.useItem();
 
       if (Math.random() < 0.01) {
         if (driver instanceof Pikachu) {
