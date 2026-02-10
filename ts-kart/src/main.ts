@@ -109,7 +109,7 @@ const drivers = [
   new Bulbasaur(3),
 ];
 
-let currentMap = "Rainbow Road";
+let currentMap: MapName = "Rainbow Road";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
